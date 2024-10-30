@@ -42,9 +42,9 @@ def forest_mask(aoi: ee.Geometry) -> ee.Image:
     Returns:
     ee.Image: The forest mask image clipped to the AOI.
     """
-    for_col = ee.ImageCollection("COPERNICUS/Landcover/100m/Proba-V/Global")
+    for_col = ee.Image("projects/servir-mekong/RLCMSV2/lc_rlcms_logical_v6/lc_rlcms_logical_v6_2023")
     img_for = for_col.toBands()
-    forest_image = img_for.select('2015_forest_type')
+    forest_image = img_for.select('b1')
     selected_forests = forest_image.expression(
         'Band >= 0 ? 1 : 0', {
             'Band': forest_image
@@ -63,7 +63,7 @@ def water_mask(aoi: ee.Geometry) -> ee.Image:
     Returns:
     ee.Image: The water mask applied to the given area of interest.
     """
-    mapped_water = ee.Image("JRC/GSW1_1/GlobalSurfaceWater")
+    mapped_water = ee.Image("JRC/GSW1_4/GlobalSurfaceWater")
     mapped_water_binary = mapped_water.expression(
         'band > 99 ? 0 : 1', {
             'band': mapped_water.select('recurrence')

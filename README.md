@@ -42,8 +42,8 @@ ee.Initialize("my_project_name")
 
 # Initialize variables for LandTrendr algorithm
 composite_params = {
-    "start_date": date(1985, 6,1),
-    "end_date": date(2017, 9,1),
+    "start_date": date(2018, 6,1),
+    "end_date": date(2024, 9,1),
     "area_of_interest": ee.Geometry({
         'type': 'Polygon',
         'coordinates': [
